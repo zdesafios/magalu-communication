@@ -1,9 +1,9 @@
-package br.com.magalu.desafios.communication.core.usecase.impl;
+package br.com.magalu.desafios.communication.app.usecase.impl;
 
-import br.com.magalu.desafios.communication.core.domain.entity.Communication;
-import br.com.magalu.desafios.communication.core.exceptions.CommunicationAlreadyExistsException;
-import br.com.magalu.desafios.communication.core.repository.CommunicationRepository;
-import br.com.magalu.desafios.communication.core.usecase.CreateCommunicationUsecase;
+import br.com.magalu.desafios.communication.app.exceptions.CommunicationAlreadyExistsException;
+import br.com.magalu.desafios.communication.app.repository.CommunicationRepository;
+import br.com.magalu.desafios.communication.app.usecase.CreateCommunicationUsecase;
+import br.com.magalu.desafios.communication.domain.entity.Communication;
 
 class CreateCommunicationUsecaseImpl implements CreateCommunicationUsecase {
 	private CommunicationRepository communicationRepository;
@@ -14,6 +14,7 @@ class CreateCommunicationUsecaseImpl implements CreateCommunicationUsecase {
 
 	@Override
 	public Communication create(Communication communication) {
+		
 		if(communicationRepository.contains(communication)) {
 			throw new CommunicationAlreadyExistsException();
 		}
