@@ -4,9 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
+import br.com.magalu.desafios.communication.domain.entity.Model;
+import br.com.magalu.desafios.communication.domain.entity.Notification;
 
 @Embeddable
-public class Content {
+public class Content extends Model {
 	
 	@Column(name = "content")
 	private String text;
@@ -17,8 +19,8 @@ public class Content {
 	}
 	
 	private void validateTextByType(String text, CommunicationType type) {
-		if(type.getContentValidator().isValid(text)) {
-			throw new IllegalArgumentException();
+		if(!type.getContentValidator().isValid(text)) {
+			addNotification(Notification.of("communication.content", "destination do not compatible  with " + type.name()));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package br.com.magalu.desafios.communication.domain.validator;
 
-public class WhathsappContentValidator implements ValidatorStrategy<String> {
+public class SMSContentValidator implements ValidatorStrategy<String> {
 	private static final int MAX_LENGTH = 160;
 	
 	@Override

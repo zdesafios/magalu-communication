@@ -4,10 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
+import br.com.magalu.desafios.communication.domain.entity.Model;
 
 
 @Embeddable
-public class Destination {
+public class Destination extends Model {
 	@Column
 	private String destination;
 	
@@ -18,7 +19,7 @@ public class Destination {
 
 	private void validateDestinationByType(String destinationAsString, CommunicationType type) {
 		if(!type.getFormatValidator().isValid(destinationAsString)) {
-			throw new IllegalArgumentException();
+			addNotification("comunication.destination", "destination do not compatible  with " + type.name());
 		}
 	}
 
