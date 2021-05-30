@@ -14,7 +14,9 @@ import br.com.magalu.desafios.communication.domain.element.CommunicationStatus;
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
 import br.com.magalu.desafios.communication.domain.vo.Content;
 import br.com.magalu.desafios.communication.domain.vo.Destination;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "communications")
 public class Communication extends Model {
@@ -43,36 +45,51 @@ public class Communication extends Model {
 	
 	private LocalDateTime createdAt;
 	
-	public Communication() {
+	public Communication(CommunicationType type) {
 		this.status = CommunicationStatus.PENDING;
+		this.type = type;
 	}
 	
 	public void setWhen(LocalDateTime when) {
-		if(checkIfCanNotUpdate()) {
-			addNotification("communication.when", "'when' not updated, because the communication has already been sent");
+		
+		if(null == when) {
+			addNotification("communication.when", "'when' needs to be in the future");
+			return;
 		}
 		
-		boolean dateIsNotFuture = when.isEqual(LocalDateTime.now()) || when.isBefore(LocalDateTime.now());
+		if(checkIfCanNotUpdate()) {
+			addNotification("communication.when", "'when' not updated, because the communication has already been sent");
+			return;
+		}
+		
+		when = when.withSecond(0);
+		
+		var now = LocalDateTime.now().withSecond(0);
+		boolean dateIsNotFuture = when.isEqual(now) || when.isBefore(now);
 		if(dateIsNotFuture) {
 			addNotification("communication.when", "'when' needs to be in the future");
+			return;
 		}
 		
 		this.when = when;
 	}
 	
-	public void setDestinationAndType(String destinationAsString, CommunicationType communicationType) {
+	public void setDestination(String destinationAsString) {
 		if(checkIfCanNotUpdate()) {
 			addNotification("communication.destination", "'destination' not updated, because the communication has already been sent");
+			return;
 		}
-		destination = new Destination(destinationAsString, communicationType);
+		destination = new Destination(destinationAsString, type);
 		addNotifications(destination.notifications());
 	}
 	
-	public void setContentAndType(String contentAsString, CommunicationType communicationType) {
+	public void setContent(String contentAsString) {		
 		if(checkIfCanNotUpdate()) {
 			addNotification("communication.content", "'content' not updated, because the communication has already been sent");
+			return;
 		}
-		content = new Content(contentAsString, communicationType);
+		
+		content = new Content(contentAsString, type);
 		addNotifications(content.notifications());
 	}
 	
@@ -80,6 +97,7 @@ public class Communication extends Model {
 	public void markAsSent() {
 		if(null == id) {
 			addNotification("communication.status", "'status' not updated, because the communication has already been sent");
+			return;
 		}
 		status = CommunicationStatus.SENT;
 	}

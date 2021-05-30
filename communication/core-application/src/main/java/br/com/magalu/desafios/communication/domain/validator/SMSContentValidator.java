@@ -5,11 +5,8 @@ public class SMSContentValidator implements ValidatorStrategy<String> {
 	
 	@Override
 	public boolean isValid(String phone) {
-		if(phone.isBlank()) {
-			return false;
-		}
 		
-		if(phone.length() > MAX_LENGTH) {
+		if(null == phone || phone.isBlank() || phone.length() > MAX_LENGTH) {
 			return false;
 		}
 		

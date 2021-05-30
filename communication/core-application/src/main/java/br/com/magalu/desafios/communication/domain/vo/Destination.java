@@ -10,15 +10,15 @@ import br.com.magalu.desafios.communication.domain.entity.Model;
 @Embeddable
 public class Destination extends Model {
 	@Column
-	private String destination;
+	private String recipient;
 	
-	public Destination(String destinationAsString, CommunicationType type) {
-		validateDestinationByType(destinationAsString, type);
-		this.destination = destinationAsString;
+	public Destination(String recipient, CommunicationType type) {
+		validateDestinationByType(recipient, type);
+		this.recipient = recipient;
 	}
 
-	private void validateDestinationByType(String destinationAsString, CommunicationType type) {
-		if(!type.getFormatValidator().isValid(destinationAsString)) {
+	private void validateDestinationByType(String recipient, CommunicationType type) {
+		if(!type.getFormatValidator().isValid(recipient)) {
 			addNotification("comunication.destination", "destination do not compatible  with " + type.name());
 		}
 	}

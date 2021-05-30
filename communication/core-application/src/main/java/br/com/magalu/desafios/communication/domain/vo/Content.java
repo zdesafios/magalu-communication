@@ -19,6 +19,7 @@ public class Content extends Model {
 	}
 	
 	private void validateTextByType(String text, CommunicationType type) {
+		
 		if(!type.getContentValidator().isValid(text)) {
 			addNotification(Notification.of("communication.content", "destination do not compatible  with " + type.name()));
 		}

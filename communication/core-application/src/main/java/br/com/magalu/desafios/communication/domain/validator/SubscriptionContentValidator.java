@@ -5,14 +5,10 @@ public class SubscriptionContentValidator implements ValidatorStrategy<String> {
 	
 	@Override
 	public boolean isValid(String content) {
-		if(content.isBlank()) {
+		if(null == content || content.isBlank() || content.length() > CONTENT_MAX_LENGTH) {
 			return false;
 		}
-		
-		if(content.length() > CONTENT_MAX_LENGTH) {
-			return false;
-		}
-		
+			
 		return true;
 	}
 
