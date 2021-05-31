@@ -15,6 +15,8 @@ Foram implementados alguns padrões de design, tais como Hexagonal, Domain Notif
 
 ## Features
 
+As regras de negócio foram definida apenas com o objetivo de trabalhar com foco no domínio para o desafio emquestão. 
+
 1. **Criar comunicado**
 - [x] A criação do comunicado segue algumas regras(citadas nas proximas features)
 - [x] O comunicado é criado com o status **PENDING** e não pode ser modificado para **SENT**, a tentativa de mudar o status para SENT sem ao menos ser salvo, o dominio será notificado com uma viloação de regra
