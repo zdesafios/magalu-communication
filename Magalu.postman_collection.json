@@ -1,0 +1,286 @@
+{
+	"info": {
+		"_postman_id": "225c2c97-8ae0-4633-8ec5-4e0d4e3567a4",
+		"name": "Magalu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE DESTINATION (SMS) - 201",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\":\"SMS\",\n    \"destination\":\"+5581995552147\",\n    \"content\":\"Conteudo valido\",\n    \"when\": \"2021-12-01 12:01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/communications",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE DESTINATION (WHATSAPP) - 201",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\":\"WHATSAPP\",\n    \"destination\":\"+5581995552147\",\n    \"content\":\"Conteudo valido\",\n    \"when\": \"2021-12-01 12:01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/communications",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE 1 DESTINATION (EMAIL) - 201",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\":\"EMAIL\",\n    \"destination\":\"contato@email.com.br\",\n    \"content\":\"Conteudo valido\",\n    \"when\": \"2021-12-01 12:01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/communications",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE 2 DESTINATION (EMAIL) - 201",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\":\"EMAIL\",\n    \"destination\":\"contato@domain.com.br\",\n    \"content\":\"Conteudo valido\",\n    \"when\": \"2021-12-01 12:01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/communications",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE - 400",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\":\"\",\n    \"destination\":\"+5511989961144\",\n    \"content\":\"conteudo válido\",\n    \"when\": \"2021-12-01 12:01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/communications",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST BY DESTINATION (+5581995552147) - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/communications?destination=%2B5581995552147",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					],
+					"query": [
+						{
+							"key": "destination",
+							"value": "%2B5581995552147"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST BY TYPE (SMS) - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/communications?type=SMS",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "SMS"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST BY TYPE (EMAIL) - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/communications?type=EMAIL",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "EMAIL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST ALL - 200 Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/communications",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST BY TYPE (WHATSAPP) - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/communications?type=WHATSAPP",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "WHATSAPP"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CANCEL - 200",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/communications/9/status",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications",
+						"9",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CANCEL - 404",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/communications/10000/status",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"communications",
+						"10000",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
