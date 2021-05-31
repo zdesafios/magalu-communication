@@ -1,7 +1,7 @@
 package br.com.magalu.desafios.communication.domain.validator;
 
 public class EmailContentValidator implements ValidatorStrategy<String> {
-	public static final int MAX_LENGTH = 200;
+	public static final int MAX_LENGTH = 20000;
 	
 
 	@Override

@@ -12,6 +12,7 @@
 	
 	<groupId>br.com.magalu.desafios</groupId>
 	<artifactId>web-api</artifactId>
+	<version>1.0.0</version>
 	<name>web-api</name>
 	<description>Web API</description>
 
