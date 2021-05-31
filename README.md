@@ -40,7 +40,9 @@ O Build é gerado pelo mavem, no entanto existe 2 formas de "buildar" e "deploya
 
 ### Fora do container
 Para realizar o build/deploy pela IDE, será necessário executar o _docker-compose_ no diretório _local_, esse docker-compose é responsavel de apenas levantar um conteiner do banco de dados(Postgres) e expor a porta 5432.
-O banco estando pronto para receber conexões, será possivel executar pela IDE o projeto sem profile
+O banco estando pronto para receber conexões, será possivel executar pela IDE o projeto sem profile.
+
+O projeto que deve ser executado: **web-api**
 
 É NECESSÁRIO JAVA > 11 E MAVEN 3
 
