@@ -2,6 +2,7 @@ package br.com.magalu.desafios.communication.support;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.magalu.desafios.communication.app.repository.CommunicationRepository;
@@ -15,7 +16,7 @@ public class ListCommunicationRepository implements CommunicationRepository {
 		try {
 			Field field = Communication.class.getDeclaredField("id");
 			field.setAccessible(true);
-			field.set(communication, "1");
+			field.set(communication, 1L);
 			field.setAccessible(false);
 			communications.add(communication);
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
@@ -27,6 +28,19 @@ public class ListCommunicationRepository implements CommunicationRepository {
 	@Override
 	public boolean contains(Communication communication) {
 		return communications.contains(communication);
+	}
+
+	@Override
+	public List<Communication> getAll() {
+		return Collections.unmodifiableList(communications);
+	}
+
+	@Override
+	public Communication getById(Long id) {
+		return communications.stream()
+				.filter(c-> c.getId().equals(id))
+				.findFirst()
+				.orElse(null);
 	}
 
 }

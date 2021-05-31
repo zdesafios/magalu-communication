@@ -12,14 +12,16 @@ public class Destination extends Model {
 	@Column
 	private String recipient;
 	
+	public Destination() {}
+	
 	public Destination(String recipient, CommunicationType type) {
 		validateDestinationByType(recipient, type);
 		this.recipient = recipient;
 	}
 
 	private void validateDestinationByType(String recipient, CommunicationType type) {
-		if(!type.getFormatValidator().isValid(recipient)) {
-			addNotification("comunication.destination", "destination do not compatible  with " + type.name());
+		if(null == type || !type.getFormatValidator().isValid(recipient)) {
+			addNotification("comunication.destination", "destination do not compatible  with type");
 		}
 	}
 

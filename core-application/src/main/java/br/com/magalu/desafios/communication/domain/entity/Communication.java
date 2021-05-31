@@ -7,7 +7,10 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import br.com.magalu.desafios.communication.domain.element.CommunicationStatus;
@@ -21,9 +24,10 @@ import lombok.Getter;
 @Table(name = "communications")
 public class Communication extends Model {
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
-	@Column(nullable = false)
+	@Column(name = "when_date", nullable = false)
 	private LocalDateTime when;
 	
 	@Column
@@ -44,10 +48,17 @@ public class Communication extends Model {
 	private Content content;
 	
 	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
+	
+	
+	public Communication() {}
 	
 	public Communication(CommunicationType type) {
 		this.status = CommunicationStatus.PENDING;
 		this.type = type;
+		if(null == type) {
+			addNotification("communication.type", "'type' is empty");
+		}
 	}
 	
 	public void setWhen(LocalDateTime when) {
@@ -112,6 +123,15 @@ public class Communication extends Model {
 	
 	private boolean checkIfCanNotUpdate() {
 		return isSent();
+	}
+	
+	@PrePersist
+	private void prePersist() {
+		createdAt = LocalDateTime.now();
+	}
+	
+	private void preUpdate() {
+		updatedAt = LocalDateTime.now();
 	}
 
 	

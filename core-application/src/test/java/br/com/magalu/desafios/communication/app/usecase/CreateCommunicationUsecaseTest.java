@@ -1,6 +1,7 @@
 package br.com.magalu.desafios.communication.app.usecase;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import br.com.magalu.desafios.communication.app.exceptions.CommunicationAlreadyExistsException;
-import br.com.magalu.desafios.communication.app.exceptions.IvalidCommunicationException;
+import br.com.magalu.desafios.communication.app.exceptions.InvalidCommunicationException;
 import br.com.magalu.desafios.communication.app.usecase.impl.CommunicationUsecaseFactory;
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
 import br.com.magalu.desafios.communication.domain.entity.Communication;
@@ -58,7 +59,7 @@ class CreateCommunicationUsecaseTest {
 		var communication = new Communication(CommunicationType.EMAIL);
 		communication.setDestination("@gmail.com");
 		
-		assertThrows(IvalidCommunicationException.class, ()-> createCommunicationUsecase.create(communication));
+		assertThrows(InvalidCommunicationException.class, ()-> createCommunicationUsecase.create(communication));
 	}
 	
 }

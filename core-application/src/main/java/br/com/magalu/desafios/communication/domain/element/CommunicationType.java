@@ -1,5 +1,7 @@
 package br.com.magalu.desafios.communication.domain.element;
 
+import java.util.Arrays;
+
 import br.com.magalu.desafios.communication.domain.validator.EmailContentValidator;
 import br.com.magalu.desafios.communication.domain.validator.EmailFormatValidator;
 import br.com.magalu.desafios.communication.domain.validator.SMSContentValidator;
@@ -22,5 +24,12 @@ public enum CommunicationType {
 	
 	private ValidatorStrategy formatValidator;
 	private ValidatorStrategy contentValidator;
+	
+	public static CommunicationType fromNameOrNull(String name) {
+		return Arrays.stream(CommunicationType.values())
+				.filter(e->e.name().equalsIgnoreCase(name))
+				.findFirst()
+				.orElse(null);
+	}
 	
 }

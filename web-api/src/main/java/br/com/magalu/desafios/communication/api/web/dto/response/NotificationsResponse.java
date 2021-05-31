@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreateCommunicationResponse {
-	private Long id;
+public class NotificationsResponse {
+	private String path;
+	private String message;
 }

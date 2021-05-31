@@ -2,6 +2,7 @@ package br.com.magalu.desafios.communication.api.facade;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import br.com.magalu.desafios.communication.api.mapper.CommunicationMapper;
@@ -24,5 +25,5 @@ public class CommunicationFacade {
 		communication = createCommunicationUsecase.create(communication);
 		return communicationMapper.entityToResponse(communication);
 	}
-
+	
 }
