@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import br.com.magalu.desafios.communication.app.repository.CommunicationRepository;
+import br.com.magalu.desafios.communication.app.usecase.CancelCommunicationUsecase;
 import br.com.magalu.desafios.communication.app.usecase.CreateCommunicationUsecase;
 import br.com.magalu.desafios.communication.app.usecase.GetAllCommunicationsUsecase;
 import br.com.magalu.desafios.communication.app.usecase.impl.CommunicationUsecaseFactory;
@@ -23,6 +24,12 @@ public class CommunicationConfiguration {
 	@Scope("prototype")
 	public GetAllCommunicationsUsecase getAllCommunicationsUsecase(@Autowired CommunicationRepository repository) {
 		return CommunicationUsecaseFactory.loadGetAllCommunications(repository);
+	}
+	
+	@Bean
+	@Scope("prototype")
+	public CancelCommunicationUsecase cencelCommunicationUsecase(@Autowired CommunicationRepository repository) {
+		return CommunicationUsecaseFactory.loadCancelCommunication(repository);
 	}
 	
 }

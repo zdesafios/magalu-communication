@@ -6,8 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CommunicationResume {
+	private Long id;
 	private String type;
 	private String destination;
 	private String content;
 	private String when;
+	private String status;
 }
