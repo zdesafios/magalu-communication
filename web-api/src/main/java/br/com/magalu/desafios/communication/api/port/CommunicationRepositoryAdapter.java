@@ -1,11 +1,14 @@
-package br.com.magalu.desafios.communication.api;
+package br.com.magalu.desafios.communication.api.port;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.magalu.desafios.communication.api.repository.CommunicationJPARepository;
+import br.com.magalu.desafios.communication.api.repository.specification.CommunicationSpeficification;
 import br.com.magalu.desafios.communication.app.repository.CommunicationRepository;
+import br.com.magalu.desafios.communication.app.usecase.queries.CommunicationQueryFilter;
 import br.com.magalu.desafios.communication.domain.entity.Communication;
 
 @Component
@@ -26,8 +29,8 @@ public class CommunicationRepositoryAdapter implements CommunicationRepository {
 	}
 
 	@Override
-	public List<Communication> getAll() {
-		return communicationRepository.findAll();
+	public List<Communication> getAll(CommunicationQueryFilter filter) {
+		return communicationRepository.findAll(CommunicationSpeficification.getAll(filter));
 	}
 
 	@Override

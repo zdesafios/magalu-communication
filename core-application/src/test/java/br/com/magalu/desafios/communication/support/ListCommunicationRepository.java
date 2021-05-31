@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import br.com.magalu.desafios.communication.app.repository.CommunicationRepository;
+import br.com.magalu.desafios.communication.app.usecase.queries.CommunicationQueryFilter;
 import br.com.magalu.desafios.communication.domain.entity.Communication;
 
 public class ListCommunicationRepository implements CommunicationRepository {
@@ -31,8 +32,8 @@ public class ListCommunicationRepository implements CommunicationRepository {
 	}
 
 	@Override
-	public List<Communication> getAll() {
-		return Collections.unmodifiableList(communications);
+	public List<Communication> getAll(CommunicationQueryFilter filter) {
+		return Collections.emptyList();
 	}
 
 	@Override

@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import br.com.magalu.desafios.communication.api.mapper.CommunicationMapper;
 import br.com.magalu.desafios.communication.api.web.dto.CommunicationResume;
 import br.com.magalu.desafios.communication.api.web.dto.request.CreateCommunicationRequest;
+import br.com.magalu.desafios.communication.api.web.dto.request.GetCommunicationsRequestQuery;
 import br.com.magalu.desafios.communication.api.web.dto.response.CreateCommunicationResponse;
 import br.com.magalu.desafios.communication.app.usecase.CreateCommunicationUsecase;
 import br.com.magalu.desafios.communication.app.usecase.GetAllCommunicationsUsecase;
@@ -30,9 +30,15 @@ public class CommunicationFacade {
 		return communicationMapper.entityToResponse(communication);
 	}
 	
-	public List<CommunicationResume> list() {
+	public List<CommunicationResume> list(GetCommunicationsRequestQuery request) {
 		var getAllCommunicationsUsecase = beanFactory.getBean(GetAllCommunicationsUsecase.class);
-		return communicationMapper.entitiesToResume(getAllCommunicationsUsecase.getCommunications());
+		var filter = communicationMapper.requestToFilter(request); 
+			
+		return communicationMapper.entitiesToResume(getAllCommunicationsUsecase.getCommunications(filter));
+	}
+
+	public CommunicationResume attemptCancelCommunication(Long communication) {
+		return null;
 	}
 	
 }

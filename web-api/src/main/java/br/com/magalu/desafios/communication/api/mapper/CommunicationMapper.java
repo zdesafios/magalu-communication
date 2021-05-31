@@ -9,9 +9,12 @@ import org.springframework.stereotype.Component;
 
 import br.com.magalu.desafios.communication.api.web.dto.CommunicationResume;
 import br.com.magalu.desafios.communication.api.web.dto.request.CreateCommunicationRequest;
+import br.com.magalu.desafios.communication.api.web.dto.request.GetCommunicationsRequestQuery;
 import br.com.magalu.desafios.communication.api.web.dto.response.CreateCommunicationResponse;
+import br.com.magalu.desafios.communication.app.usecase.queries.CommunicationQueryFilter;
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
 import br.com.magalu.desafios.communication.domain.entity.Communication;
+import br.com.magalu.desafios.communication.domain.vo.Destination;
 
 @Component
 public class CommunicationMapper {
@@ -35,6 +38,14 @@ public class CommunicationMapper {
 		return communications.stream()
 				.map(c-> new CommunicationResume(c.getType().name(), c.getDestination().getRecipient(), c.getContent().getText(), c.getWhen().format(DATATIME_FORMATTER)))
 				.collect(Collectors.toList());
+	}
+
+	public CommunicationQueryFilter requestToFilter(GetCommunicationsRequestQuery request) {
+		return CommunicationQueryFilter.builder()
+				.type(CommunicationType.fromNameOrNull(request.getType()))
+				.destination(new Destination(request.getDestination(), CommunicationType.fromNameOrNull(request.getType())))
+				.when(null!=request.getWhen()?LocalDateTime.parse(request.getWhen(), DATATIME_FORMATTER): null)
+				.build();
 	}
 
 }
