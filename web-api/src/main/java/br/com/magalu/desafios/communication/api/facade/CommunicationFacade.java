@@ -1,14 +1,18 @@
 package br.com.magalu.desafios.communication.api.facade;
 
+import java.util.List;
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import br.com.magalu.desafios.communication.api.mapper.CommunicationMapper;
+import br.com.magalu.desafios.communication.api.web.dto.CommunicationResume;
 import br.com.magalu.desafios.communication.api.web.dto.request.CreateCommunicationRequest;
 import br.com.magalu.desafios.communication.api.web.dto.response.CreateCommunicationResponse;
 import br.com.magalu.desafios.communication.app.usecase.CreateCommunicationUsecase;
+import br.com.magalu.desafios.communication.app.usecase.GetAllCommunicationsUsecase;
 
 @Component
 public class CommunicationFacade {
@@ -24,6 +28,11 @@ public class CommunicationFacade {
 		var communication = communicationMapper.requestToEntity(request);
 		communication = createCommunicationUsecase.create(communication);
 		return communicationMapper.entityToResponse(communication);
+	}
+	
+	public List<CommunicationResume> list() {
+		var getAllCommunicationsUsecase = beanFactory.getBean(GetAllCommunicationsUsecase.class);
+		return communicationMapper.entitiesToResume(getAllCommunicationsUsecase.getCommunications());
 	}
 	
 }

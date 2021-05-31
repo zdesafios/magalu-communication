@@ -5,14 +5,12 @@ import br.com.magalu.desafios.communication.app.exceptions.InvalidCommunicationE
 import br.com.magalu.desafios.communication.app.repository.CommunicationRepository;
 import br.com.magalu.desafios.communication.app.usecase.CreateCommunicationUsecase;
 import br.com.magalu.desafios.communication.domain.entity.Communication;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 class CreateCommunicationUsecaseImpl implements CreateCommunicationUsecase {
 	private CommunicationRepository communicationRepository;
 	
-	public CreateCommunicationUsecaseImpl(CommunicationRepository communicationRepository) {
-		this.communicationRepository = communicationRepository;
-	}
-
 	@Override
 	public Communication create(Communication communication) {
 		

@@ -6,10 +6,12 @@ import javax.persistence.Embeddable;
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
 import br.com.magalu.desafios.communication.domain.entity.Model;
 import br.com.magalu.desafios.communication.domain.entity.Notification;
+import lombok.Getter;
 
 @Embeddable
 public class Content extends Model {
 	
+	@Getter
 	@Column(name = "content")
 	private String text;
 	

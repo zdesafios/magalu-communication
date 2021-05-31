@@ -2,9 +2,12 @@ package br.com.magalu.desafios.communication.api.mapper;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import br.com.magalu.desafios.communication.api.web.dto.CommunicationResume;
 import br.com.magalu.desafios.communication.api.web.dto.request.CreateCommunicationRequest;
 import br.com.magalu.desafios.communication.api.web.dto.response.CreateCommunicationResponse;
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
@@ -26,6 +29,12 @@ public class CommunicationMapper {
 
 	public CreateCommunicationResponse entityToResponse(Communication communication) {
 		return new CreateCommunicationResponse(communication.getId());
+	}
+
+	public List<CommunicationResume> entitiesToResume(List<Communication> communications) {
+		return communications.stream()
+				.map(c-> new CommunicationResume(c.getType().name(), c.getDestination().getRecipient(), c.getContent().getText(), c.getWhen().format(DATATIME_FORMATTER)))
+				.collect(Collectors.toList());
 	}
 
 }

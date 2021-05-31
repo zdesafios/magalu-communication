@@ -5,10 +5,12 @@ import javax.persistence.Embeddable;
 
 import br.com.magalu.desafios.communication.domain.element.CommunicationType;
 import br.com.magalu.desafios.communication.domain.entity.Model;
+import lombok.Getter;
 
 
 @Embeddable
 public class Destination extends Model {
+	@Getter
 	@Column
 	private String recipient;
 	

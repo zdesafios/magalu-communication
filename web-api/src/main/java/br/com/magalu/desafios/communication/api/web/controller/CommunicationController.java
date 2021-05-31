@@ -1,6 +1,7 @@
 package br.com.magalu.desafios.communication.api.web.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magalu.desafios.communication.api.facade.CommunicationFacade;
+import br.com.magalu.desafios.communication.api.web.dto.CommunicationResume;
 import br.com.magalu.desafios.communication.api.web.dto.request.CreateCommunicationRequest;
 
 @RestController
@@ -36,8 +38,8 @@ public class CommunicationController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> list() {
-		return null;
+	public ResponseEntity<List<CommunicationResume>> list() {
+		return ResponseEntity.ok(communicationFacade.list());
 	}
 	
 	@GetMapping("/{communication}")
