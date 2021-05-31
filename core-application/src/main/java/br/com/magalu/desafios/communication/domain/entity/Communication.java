@@ -104,6 +104,14 @@ public class Communication extends Model {
 		addNotifications(content.notifications());
 	}
 	
+	public void markAsCanceled() {
+		if(checkIfCanNotUpdate()) {
+			addNotification("communication.status", "'status' not updated, because the communication has already been sent");
+			return;
+		}
+		
+		this.status = CommunicationStatus.CANCELED;
+	}
 
 	public void markAsSent() {
 		if(null == id) {
@@ -133,6 +141,8 @@ public class Communication extends Model {
 	private void preUpdate() {
 		updatedAt = LocalDateTime.now();
 	}
+
+	
 
 	
 }

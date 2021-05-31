@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.com.magalu.desafios.communication.api.web.dto.response.NotificationsResponse;
 import br.com.magalu.desafios.communication.app.exceptions.CommunicationAlreadyExistsException;
+import br.com.magalu.desafios.communication.app.exceptions.CommunicationNotFoundException;
 import br.com.magalu.desafios.communication.app.exceptions.InvalidCommunicationException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,13 @@ public class ApiExceptionHandler {
 		return e.getNotifies().stream()
 				.map(n-> new NotificationsResponse(n.getPath(), n.getMessage()))
 				.collect(Collectors.toList());
+	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(CommunicationNotFoundException.class)
+	public NotificationsResponse badrequest(CommunicationNotFoundException e) {
+		log.error("Communication not found", e);
+		return new NotificationsResponse("communication.id", "Communication Not Found with id " + e.getCommunication());
 	}
 
 }

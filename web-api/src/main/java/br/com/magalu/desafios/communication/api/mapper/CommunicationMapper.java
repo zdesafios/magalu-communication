@@ -36,7 +36,7 @@ public class CommunicationMapper {
 
 	public List<CommunicationResume> entitiesToResume(List<Communication> communications) {
 		return communications.stream()
-				.map(c-> new CommunicationResume(c.getType().name(), c.getDestination().getRecipient(), c.getContent().getText(), c.getWhen().format(DATATIME_FORMATTER)))
+				.map(this::entityToResume)
 				.collect(Collectors.toList());
 	}
 
@@ -46,6 +46,17 @@ public class CommunicationMapper {
 				.destination(new Destination(request.getDestination(), CommunicationType.fromNameOrNull(request.getType())))
 				.when(null!=request.getWhen()?LocalDateTime.parse(request.getWhen(), DATATIME_FORMATTER): null)
 				.build();
+	}
+
+	public CommunicationResume entityToResume(Communication communication) {
+		return new CommunicationResume(
+			communication.getId(),
+			communication.getType().name(),
+			communication.getDestination().getRecipient(),
+			communication.getContent().getText(),
+			communication.getWhen().format(DATATIME_FORMATTER),
+			communication.getStatus().name()
+		);
 	}
 
 }

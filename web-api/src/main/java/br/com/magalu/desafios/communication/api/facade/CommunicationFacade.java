@@ -11,6 +11,7 @@ import br.com.magalu.desafios.communication.api.web.dto.CommunicationResume;
 import br.com.magalu.desafios.communication.api.web.dto.request.CreateCommunicationRequest;
 import br.com.magalu.desafios.communication.api.web.dto.request.GetCommunicationsRequestQuery;
 import br.com.magalu.desafios.communication.api.web.dto.response.CreateCommunicationResponse;
+import br.com.magalu.desafios.communication.app.usecase.CancelCommunicationUsecase;
 import br.com.magalu.desafios.communication.app.usecase.CreateCommunicationUsecase;
 import br.com.magalu.desafios.communication.app.usecase.GetAllCommunicationsUsecase;
 
@@ -37,8 +38,10 @@ public class CommunicationFacade {
 		return communicationMapper.entitiesToResume(getAllCommunicationsUsecase.getCommunications(filter));
 	}
 
-	public CommunicationResume attemptCancelCommunication(Long communication) {
-		return null;
+	public CommunicationResume attemptCancelCommunication(Long communicationId) {
+		var cancelCommunicationUsecase = beanFactory.getBean(CancelCommunicationUsecase.class);
+		var communication = cancelCommunicationUsecase.cancel(communicationId);
+		return communicationMapper.entityToResume(communication);
 	}
 	
 }
