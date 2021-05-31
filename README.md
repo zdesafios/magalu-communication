@@ -50,7 +50,7 @@ O projeto que deve ser executado: **web-api**
 Para realizar o build/deploy pelo Docker é requerido apenas docker e docker-compose na máquina, pois tanto o Java quanto o Maven estão dentro do container.
 O postgres não expoe a porta e o profile utilizado pela aplicação(Spring) é "container"
 
-É NECESSÁRIO JAVA NEM MAVEN
+NÂO É NECESSÁRIO JAVA NEM MAVEN
 
 ## Testes
 Ao executar o código abaixo, será criado o relatório de testes, nesse primeiro momento foi testado apenas a camada de domínio
