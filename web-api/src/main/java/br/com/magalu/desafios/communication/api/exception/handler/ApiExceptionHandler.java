@@ -20,8 +20,9 @@ public class ApiExceptionHandler {
 
 	@ResponseStatus(HttpStatus.CONFLICT)
 	@ExceptionHandler(CommunicationAlreadyExistsException.class)
-	public void conflict(CommunicationAlreadyExistsException e) {
+	public NotificationsResponse conflict(CommunicationAlreadyExistsException e) {
 		log.error("Communication already exists", e);
+		return new NotificationsResponse("communication", "Communication already exists");
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
